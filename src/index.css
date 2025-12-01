@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* VIP Curtains & Furniture Design System */
+
+@layer base {
+  :root {
+    /* Premium Color Palette */
+    --background: 38 25% 95%; /* Cloud White */
+    --foreground: 200 9% 12%; /* Deep Charcoal */
+    
+    --card: 38 25% 97%;
+    --card-foreground: 200 9% 12%;
+    
+    --popover: 38 25% 97%;
+    --popover-foreground: 200 9% 12%;
+    
+    --primary: 186 16% 48%; /* Soft Teal */
+    --primary-foreground: 38 25% 97%;
+    
+    --secondary: 38 31% 83%; /* Warm Sand */
+    --secondary-foreground: 200 9% 12%;
+    
+    --muted: 38 20% 90%;
+    --muted-foreground: 186 8% 45%;
+    
+    --accent: 40 32% 62%; /* Champagne Gold */
+    --accent-foreground: 200 9% 12%;
+    
+    --destructive: 0 65% 60%;
+    --destructive-foreground: 38 25% 97%;
+    
+    --success: 156 58% 48%;
+    --warning: 35 77% 58%;
+    
+    --border: 38 20% 85%;
+    --input: 38 20% 88%;
+    --ring: 186 16% 48%;
+    
+    --radius: 0.75rem;
+    
+    /* Custom Gradients */
+    --gradient-luxury: linear-gradient(135deg, hsl(186 16% 48%), hsl(40 32% 62%));
+    --gradient-soft: linear-gradient(180deg, hsl(38 25% 97%), hsl(38 25% 95%));
+    --gradient-overlay: linear-gradient(180deg, rgba(28, 31, 34, 0.7), rgba(28, 31, 34, 0.3));
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 8px 30px -4px rgba(0, 0, 0, 0.12);
+    --shadow-luxury: 0 12px 40px -8px rgba(106, 138, 143, 0.2);
+    
+    /* Transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    /* Retina display optimization */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  /* Retina display media query */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    html {
+      font-size: 15px; /* Slightly smaller base for retina displays */
+    }
+    
+    @media (min-width: 768px) {
+      html {
+        font-size: 15px;
+      }
+    }
+    
+    @media (min-width: 1024px) {
+      html {
+        font-size: 15px; /* Reduced from 16px for better scaling */
+      }
+    }
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    font-feature-settings: 'cv11', 'ss01';
+    font-optical-sizing: auto;
+    font-size: 13px; /* Mobile: 13px base */
+    line-height: 1.6;
+  }
+  
+  @media (min-width: 768px) {
+    body {
+      font-size: 15px; /* Tablet and up: 15px */
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    body {
+      font-size: 16px; /* Desktop: 16px */
+    }
+  }
+  
+  p, .text-base {
+    font-size: 0.875rem; /* 14px on mobile */
+    line-height: 1.65;
+  }
+  
+  @media (min-width: 768px) {
+    p, .text-base {
+      font-size: 0.9375rem; /* 15px on tablet */
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    p, .text-base {
+      font-size: 1rem; /* 16px on desktop */
+    }
+  }
+  
+  .text-sm {
+    font-size: 0.75rem; /* 12px on mobile */
+  }
+  
+  @media (min-width: 768px) {
+    .text-sm {
+      font-size: 0.8125rem; /* 13px on tablet */
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .text-sm {
+      font-size: 0.875rem; /* 14px on desktop */
+    }
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-4xl xl:text-6xl 2xl:text-7xl;
+    font-weight: 600;
+  }
+  
+  /* Custom size for lg screens (1024px-1399px) - 15.6" laptops - optimized for 90% zoom appearance */
+  @media (min-width: 1024px) and (max-width: 1399px) {
+    h1 {
+      font-size: 2.25rem; /* 36px - optimized for laptop screens */
+    }
+    h2 {
+      font-size: 1.875rem; /* 30px - optimized for laptop screens */
+    }
+    h3 {
+      font-size: 1.625rem; /* 26px - optimized for laptop screens */
+    }
+  }
+  
+  /* Retina display adjustments for headings on laptop screens */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    @media (min-width: 1024px) and (max-width: 1399px) {
+      h1 {
+        font-size: 2rem; /* 32px - slightly smaller for retina */
+      }
+      h2 {
+        font-size: 1.75rem; /* 28px */
+      }
+      h3 {
+        font-size: 1.5rem; /* 24px */
+      }
+    }
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl lg:text-3xl xl:text-4xl;
+  }
+  
+
+  h4 {
+    @apply text-xl md:text-2xl;
+  }
+  
+  h5 {
+    @apply text-lg md:text-xl;
+  }
+  
+
+  h6 {
+    @apply text-base md:text-lg;
+  }
+}
+
+@layer utilities {
+  .gradient-luxury {
+    background: var(--gradient-luxury);
+  }
+  
+  .gradient-soft {
+    background: var(--gradient-soft);
+  }
+  
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .shadow-medium {
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .shadow-luxury {
+    box-shadow: var(--shadow-luxury);
+  }
+  
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Footer specific styles - all text 12px on desktop except titles */
+  .footer-text {
+    font-size: 0.75rem; /* 12px on all screens */
+  }
+  
+  @media (min-width: 1024px) {
+    .footer-text {
+      font-size: 0.75rem; /* 12px on desktop */
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+
