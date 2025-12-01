@@ -16,11 +16,32 @@ export const DynamicFavicon = () => {
           const existingFavicons = document.querySelectorAll("link[rel*='icon']");
           existingFavicons.forEach(link => link.remove());
 
-          // Add new favicon
+          // Determine file type from URL
+          const faviconUrl = data.value.toLowerCase();
+          let type = "image/x-icon"; // default to ICO
+          
+          if (faviconUrl.endsWith(".png")) {
+            type = "image/png";
+          } else if (faviconUrl.endsWith(".svg")) {
+            type = "image/svg+xml";
+          } else if (faviconUrl.endsWith(".ico")) {
+            type = "image/x-icon";
+          }
+
+          // Add new favicon with proper type
           const link = document.createElement("link");
           link.rel = "icon";
+          link.type = type;
           link.href = data.value;
           document.head.appendChild(link);
+
+          // Also add apple-touch-icon for PNG files (better mobile support)
+          if (faviconUrl.endsWith(".png")) {
+            const appleLink = document.createElement("link");
+            appleLink.rel = "apple-touch-icon";
+            appleLink.href = data.value;
+            document.head.appendChild(appleLink);
+          }
         }
       } catch (error) {
         console.error("Error loading favicon:", error);

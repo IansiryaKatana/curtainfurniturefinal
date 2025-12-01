@@ -442,12 +442,12 @@ const AdminDashboard = () => {
                             <Input
                               id="favicon"
                               type="url"
-                              placeholder="https://example.com/favicon.ico"
+                              placeholder="https://example.com/favicon.png"
                               value={faviconUrl}
                               onChange={(e) => setFaviconUrl(e.target.value)}
                             />
                             <p className="text-sm text-muted-foreground mt-1">
-                              Enter the full URL to your favicon image (PNG, ICO, or SVG format)
+                              Enter the full URL to your favicon image. PNG format is recommended for best quality (also supports ICO and SVG)
                             </p>
                           </div>
                         </div>

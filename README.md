@@ -56,7 +56,40 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Build the project using `npm run build` and deploy the `dist` folder to your preferred hosting service.
+### Netlify Deployment (Recommended)
+
+This project is configured for Netlify deployment with proper routing support.
+
+**Option 1: Deploy via Netlify UI**
+1. Push your code to GitHub
+2. Go to [Netlify](https://app.netlify.com)
+3. Click "Add new site" → "Import an existing project"
+4. Connect your GitHub repository
+5. Netlify will auto-detect the build settings from `netlify.toml`
+6. Click "Deploy site"
+
+**Option 2: Deploy via Netlify CLI**
+```sh
+# Install Netlify CLI
+npm install -g netlify-cli
+
+# Login to Netlify
+netlify login
+
+# Deploy
+netlify deploy --prod
+```
+
+**Build Configuration:**
+- Build command: `npm run build`
+- Publish directory: `dist`
+- Node version: 18
+
+The `_redirects` file ensures all routes are handled by React Router for proper client-side routing.
+
+### Other Hosting Services
+
+Build the project using `npm run build` and deploy the `dist` folder to your preferred hosting service. Make sure to configure redirects for client-side routing (all routes should redirect to `index.html`).
 
 ## Developer
 
