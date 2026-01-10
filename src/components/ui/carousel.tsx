@@ -221,4 +221,88 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
 );
 CarouselNext.displayName = "CarouselNext";
 
-export { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext };
+const CarouselDots = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => {
+    const { api } = useCarousel();
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
+    const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([]);
+
+    React.useEffect(() => {
+      if (!api) {
+        return;
+      }
+
+      setScrollSnaps(api.scrollSnapList());
+      setSelectedIndex(api.selectedScrollSnap());
+
+      api.on("select", () => {
+        setSelectedIndex(api.selectedScrollSnap());
+      });
+
+      api.on("reInit", () => {
+        setScrollSnaps(api.scrollSnapList());
+        setSelectedIndex(api.selectedScrollSnap());
+      });
+    }, [api]);
+
+    if (scrollSnaps.length <= 1) {
+      return null;
+    }
+
+    // Limit dots to maximum 5 for better UI/UX
+    const maxDots = 5;
+    const totalSlides = scrollSnaps.length;
+    const dotsCount = Math.min(maxDots, totalSlides);
+    
+    // Calculate which dot should be active based on current slide position
+    const getActiveDotIndex = () => {
+      if (dotsCount === totalSlides) {
+        return selectedIndex;
+      }
+      // Map current slide to dot index
+      const slideRange = totalSlides / dotsCount;
+      return Math.floor(selectedIndex / slideRange);
+    };
+
+    // Calculate which slide to jump to when clicking a dot
+    const getSlideIndexForDot = (dotIndex: number) => {
+      if (dotsCount === totalSlides) {
+        return dotIndex;
+      }
+      // Distribute slides evenly across dots
+      const slideRange = totalSlides / dotsCount;
+      return Math.floor(dotIndex * slideRange);
+    };
+
+    const activeDotIndex = getActiveDotIndex();
+
+    return (
+      <div
+        ref={ref}
+        className={cn("flex justify-center gap-2 mt-4", className)}
+        {...props}
+      >
+        {Array.from({ length: dotsCount }).map((_, dotIndex) => {
+          const isActive = dotIndex === activeDotIndex;
+          return (
+            <button
+              key={dotIndex}
+              type="button"
+              className={cn(
+                "h-2 rounded-full transition-all duration-300",
+                isActive
+                  ? "w-8 bg-primary"
+                  : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
+              )}
+              onClick={() => api?.scrollTo(getSlideIndexForDot(dotIndex))}
+              aria-label={`Go to slide group ${dotIndex + 1}`}
+            />
+          );
+        })}
+      </div>
+    );
+  },
+);
+CarouselDots.displayName = "CarouselDots";
+
+export { type CarouselApi, Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, CarouselDots };
