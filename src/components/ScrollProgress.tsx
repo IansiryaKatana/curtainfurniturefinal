@@ -27,7 +27,7 @@ const ScrollProgress = ({ containerRef }: ScrollProgressProps) => {
   }, [containerRef]);
 
   return (
-    <div className="absolute top-0 left-0 right-0 h-1 bg-muted z-50">
+    <div className="absolute top-0 left-0 right-0 h-1 bg-muted z-50 pointer-events-none">
       <motion.div
         className="h-full bg-primary"
         style={{ width: `${scrollProgress}%` }}
