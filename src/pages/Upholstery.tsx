@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, Sofa, Bed, Armchair, Home } from "lucide-react";
 import SEO from "@/components/SEO";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import BookingDialog from "@/components/BookingDialog";
 
 // Import all furniture images
 import furniture1 from "@/assets/furniture/furniturehome (1).jpeg";
@@ -157,6 +159,8 @@ const process = [
 ];
 
 const Upholstery = () => {
+  const [bookingDialogOpen, setBookingDialogOpen] = useState(false);
+  
   const servicesStructuredData = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -197,6 +201,7 @@ const Upholstery = () => {
             <Button
               size="lg"
               className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-8 py-6 shadow-luxury transition-smooth group"
+              onClick={() => setBookingDialogOpen(true)}
             >
               Get Free Assessment
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -397,6 +402,7 @@ const Upholstery = () => {
               <Button
                 size="lg"
                 className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-8 py-6 shadow-luxury transition-smooth"
+                onClick={() => setBookingDialogOpen(true)}
               >
                 Book Free Assessment
               </Button>
@@ -404,13 +410,15 @@ const Upholstery = () => {
                 size="lg"
                 variant="outline"
                 className="border-border hover:border-primary hover:text-primary transition-smooth px-8 py-6"
+                asChild
               >
-                Call +971 50 464 9831
+                <a href="tel:+971504649831">Call +971 50 464 9831</a>
               </Button>
             </div>
           </motion.div>
         </div>
       </section>
+      <BookingDialog open={bookingDialogOpen} onOpenChange={setBookingDialogOpen} />
     </PageLayout>
   );
 };

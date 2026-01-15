@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import SEO from "@/components/SEO";
+import BookingDialog from "@/components/BookingDialog";
 import blackoutImage from "@/assets/curtain-blackout.jpg";
 import sheerImage from "@/assets/curtain-sheer.jpg";
 
@@ -107,6 +109,8 @@ const curtainTypes = [
 ];
 
 const Curtains = () => {
+  const [bookingDialogOpen, setBookingDialogOpen] = useState(false);
+  
   const productsStructuredData = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -151,6 +155,7 @@ const Curtains = () => {
             <Button
               size="lg"
               className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-8 py-6 shadow-luxury transition-smooth group"
+              onClick={() => setBookingDialogOpen(true)}
             >
               Book Free Consultation
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -212,8 +217,9 @@ const Curtains = () => {
                     size="lg"
                     variant="outline"
                     className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-smooth"
+                    asChild
                   >
-                    Get Free Quote
+                    <NavLink to="/quote">Get Free Quote</NavLink>
                   </Button>
                 </div>
               </motion.div>
@@ -240,6 +246,7 @@ const Curtains = () => {
               <Button
                 size="lg"
                 className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-8 py-6 shadow-luxury transition-smooth"
+                onClick={() => setBookingDialogOpen(true)}
               >
                 Schedule Free Visit
               </Button>
@@ -247,13 +254,15 @@ const Curtains = () => {
                 size="lg"
                 variant="outline"
                 className="border-border hover:border-primary hover:text-primary transition-smooth px-8 py-6"
+                asChild
               >
-                Call +971 50 464 9831
+                <a href="tel:+971504649831">Call +971 50 464 9831</a>
               </Button>
             </div>
           </motion.div>
         </div>
       </section>
+      <BookingDialog open={bookingDialogOpen} onOpenChange={setBookingDialogOpen} />
     </PageLayout>
   );
 };

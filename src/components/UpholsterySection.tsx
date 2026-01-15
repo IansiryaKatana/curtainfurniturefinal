@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import sofaImage from "@/assets/upholstery-sofa.jpg";
 
 const UpholsterySection = () => {
@@ -61,9 +62,12 @@ const UpholsterySection = () => {
             <Button
               size="lg"
               className="bg-accent hover:bg-accent/90 text-accent-foreground font-medium text-sm sm:text-base px-6 sm:px-7 md:px-8 py-4 sm:py-5 md:py-6 shadow-luxury transition-smooth group"
+              asChild
             >
-              View Upholstery Gallery
-              <ArrowRight className="ml-1.5 sm:ml-2 h-4 w-4 sm:h-4.5 sm:w-4.5 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform" />
+              <Link to="/upholstery">
+                View Upholstery Gallery
+                <ArrowRight className="ml-1.5 sm:ml-2 h-4 w-4 sm:h-4.5 sm:w-4.5 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </Button>
           </motion.div>
         </div>

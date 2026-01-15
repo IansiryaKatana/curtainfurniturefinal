@@ -230,7 +230,7 @@ serve(async (req) => {
           },
           body: JSON.stringify({
             from: "VIP Quotes <onboarding@resend.dev>",
-            to: ["info@vipcurtains.ae"],
+            to: ["yahiaahmed01@gmail.com"],
             subject: `💰 New Quote Request: ${quoteData.name} - ${quoteData.project_type.join(', ')}`,
             html: createAdminEmail(quoteData),
           }),

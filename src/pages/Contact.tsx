@@ -140,9 +140,22 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-medium text-foreground mb-1">Email Us</h4>
-                    <a href="mailto:info@vipcurtains.ae" className="text-muted-foreground hover:text-primary transition-smooth">
-                      info@vipcurtains.ae
-                    </a>
+                    <Button
+                      variant="link"
+                      className="text-muted-foreground hover:text-primary transition-smooth p-0 h-auto font-normal"
+                      onClick={() => {
+                        const formElement = document.querySelector('form');
+                        if (formElement) {
+                          formElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                          setTimeout(() => {
+                            const nameInput = formElement.querySelector('input[type="text"]') as HTMLInputElement;
+                            if (nameInput) nameInput.focus();
+                          }, 500);
+                        }
+                      }}
+                    >
+                      Send us an email
+                    </Button>
                   </div>
                 </div>
 

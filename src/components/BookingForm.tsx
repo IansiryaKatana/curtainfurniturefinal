@@ -11,9 +11,10 @@ import SuccessDialog from "./SuccessDialog";
 
 interface BookingFormProps {
   compact?: boolean;
+  onSuccess?: () => void;
 }
 
-const BookingForm = ({ compact = false }: BookingFormProps) => {
+const BookingForm = ({ compact = false, onSuccess }: BookingFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState({
@@ -196,23 +197,28 @@ const BookingForm = ({ compact = false }: BookingFormProps) => {
         </motion.div>
   );
 
-  if (compact) {
-    return formContent;
-  }
+  const handleSuccessClose = () => {
+    setShowSuccess(false);
+    if (onSuccess) {
+      onSuccess();
+    }
+  };
 
   return (
     <>
       <SuccessDialog
         open={showSuccess}
-        onOpenChange={setShowSuccess}
+        onOpenChange={handleSuccessClose}
         title="Booking Confirmed!"
         description="Thank you for booking! We'll contact you within 24 hours to schedule your free home visit."
       />
-      <section id="contact" className="py-16 md:py-24 lg:py-32 bg-background">
-        <div className="container mx-auto px-4 md:px-6 max-w-4xl">
-          {formContent}
-        </div>
-      </section>
+      {compact ? formContent : (
+        <section id="contact" className="py-16 md:py-24 lg:py-32 bg-background">
+          <div className="container mx-auto px-4 md:px-6 max-w-4xl">
+            {formContent}
+          </div>
+        </section>
+      )}
     </>
   );
 };

@@ -184,7 +184,7 @@ serve(async (req) => {
           },
           body: JSON.stringify({
             from: "VIP Contact <onboarding@resend.dev>",
-            to: ["info@vipcurtains.ae"],
+            to: ["yahiaahmed01@gmail.com"],
             subject: `💬 New Contact: ${contactData.name} - ${contactData.subject}`,
             html: createAdminEmail(contactData),
           }),

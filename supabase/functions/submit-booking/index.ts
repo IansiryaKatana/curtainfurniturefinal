@@ -223,7 +223,7 @@ serve(async (req) => {
           },
           body: JSON.stringify({
             from: "VIP Bookings <onboarding@resend.dev>",
-            to: ["info@vipcurtains.ae"],
+            to: ["yahiaahmed01@gmail.com"],
             subject: `🔔 New Booking: ${bookingData.name} - ${bookingData.preferred_date}`,
             html: createAdminEmail(bookingData),
           }),

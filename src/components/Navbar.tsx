@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Phone, Menu, X, MessageCircle } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
-import BookingDialog from "./BookingDialog";
 
 const menuItems = [
   { name: "Home", href: "/" },
@@ -15,12 +14,10 @@ const menuItems = [
   { name: "Gallery", href: "/gallery" },
   { name: "FAQ", href: "/faq" },
   { name: "Get Quote", href: "/quote" },
-  { name: "Contact", href: "/contact" },
 ];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [bookingDialogOpen, setBookingDialogOpen] = useState(false);
   const location = useLocation();
 
   return (
@@ -70,9 +67,11 @@ const Navbar = () => {
               <Button
                 size="sm"
                 className="bg-primary hover:bg-primary/90 text-primary-foreground transition-smooth text-xs xl:text-sm px-3 xl:px-4 py-1.5 xl:py-2"
-                onClick={() => setBookingDialogOpen(true)}
+                asChild
               >
-                Book Visit
+                <NavLink to="/contact">
+                  Contact Us
+                </NavLink>
               </Button>
             </div>
 
@@ -122,6 +121,15 @@ const Navbar = () => {
                 <div className="flex flex-col gap-3 pt-4">
                   <Button
                     size="lg"
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground transition-smooth"
+                    asChild
+                  >
+                    <NavLink to="/contact" onClick={() => setIsOpen(false)}>
+                      Contact Us
+                    </NavLink>
+                  </Button>
+                  <Button
+                    size="lg"
                     variant="outline"
                     className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-smooth"
                     asChild
@@ -147,7 +155,6 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      <BookingDialog open={bookingDialogOpen} onOpenChange={setBookingDialogOpen} />
     </>
   );
 };

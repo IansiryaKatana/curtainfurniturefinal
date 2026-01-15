@@ -89,9 +89,9 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-2.5 sm:gap-3">
                 <Mail className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 text-accent shrink-0" />
-                <a href="mailto:info@vipcurtains.ae" className="text-background/80 hover:text-accent transition-smooth footer-text">
-                  info@vipcurtains.ae
-                </a>
+                <NavLink to="/contact" className="text-background/80 hover:text-accent transition-smooth footer-text">
+                  Contact Us
+                </NavLink>
               </li>
               <li className="flex items-start gap-2.5 sm:gap-3">
                 <Clock className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 text-accent shrink-0 mt-0.5" />

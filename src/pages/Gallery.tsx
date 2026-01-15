@@ -1,14 +1,15 @@
 import { motion } from "framer-motion";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import PageLayout from "@/components/PageLayout";
 import SEO from "@/components/SEO";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import BookingDialog from "@/components/BookingDialog";
 
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [bookingDialogOpen, setBookingDialogOpen] = useState(false);
 
   const { data: galleryItems } = useQuery({
     queryKey: ["gallery"],
@@ -137,12 +138,17 @@ const Gallery = () => {
             <p className="text-muted-foreground text-base mb-8">
               Book a free consultation and let our experts help you choose the perfect window treatments.
             </p>
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
+            <Button 
+              size="lg" 
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
+              onClick={() => setBookingDialogOpen(true)}
+            >
               Book Free Consultation
             </Button>
           </motion.div>
         </div>
       </section>
+      <BookingDialog open={bookingDialogOpen} onOpenChange={setBookingDialogOpen} />
     </PageLayout>
   );
 };
