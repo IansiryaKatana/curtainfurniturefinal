@@ -194,7 +194,7 @@ const Upholstery = () => {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-foreground mb-6">Custom Upholstery Services</h1>
+            <h1 className="text-foreground mb-6 text-2xl sm:text-3xl md:text-4xl lg:text-5xl whitespace-nowrap">Custom Upholstery Services</h1>
             <p className="text-muted-foreground text-base leading-relaxed mb-8">
               Breathe new life into your beloved furniture. From complete sofa reupholstery to custom headboards, we transform your pieces into stunning focal points.
             </p>

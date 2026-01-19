@@ -30,7 +30,7 @@ const UpholsterySection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-foreground mb-4 sm:mb-5 md:mb-6">Custom Upholstery Services</h2>
+            <h2 className="text-foreground mb-4 sm:mb-5 md:mb-6 text-xl sm:text-2xl md:text-3xl lg:text-4xl whitespace-nowrap">Custom Upholstery Services</h2>
             <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-5 sm:mb-6">
               Transform your furniture with our expert upholstery services. From sofas and headboards to dining chairs and cushions, we breathe new life into your favorite pieces.
             </p>

@@ -8,6 +8,7 @@ import { X } from "lucide-react";
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [itemsToShow, setItemsToShow] = useState(16); // 4 rows × 4 items = 16
 
   const { data: galleryItems } = useQuery({
     queryKey: ["gallery"],
@@ -33,6 +34,22 @@ const Gallery = () => {
     if (selectedCategory === "All") return galleryItems;
     return galleryItems.filter(item => item.room_type === selectedCategory);
   }, [galleryItems, selectedCategory]);
+
+  const displayedItems = useMemo(() => {
+    return filteredItems.slice(0, itemsToShow);
+  }, [filteredItems, itemsToShow]);
+
+  const hasMoreItems = filteredItems.length > itemsToShow;
+
+  const handleLoadMore = () => {
+    setItemsToShow(prev => prev + 4); // Load one more row (4 items)
+  };
+
+  // Reset items to show when category changes
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    setItemsToShow(16); // Reset to initial 4 rows
+  };
 
   if (!galleryItems || galleryItems.length === 0) {
     return null;
@@ -65,7 +82,7 @@ const Gallery = () => {
           {categories.map((category) => (
             <Button
               key={category}
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => handleCategoryChange(category)}
               variant={selectedCategory === category ? "default" : "outline"}
               className={selectedCategory === category 
                 ? "bg-primary text-primary-foreground" 
@@ -79,10 +96,10 @@ const Gallery = () => {
         {/* Gallery Grid */}
         <motion.div 
           layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6"
         >
           <AnimatePresence>
-            {filteredItems?.map((item, index) => (
+            {displayedItems?.map((item, index) => (
               <motion.div
                 key={item.id}
                 layout
@@ -112,6 +129,25 @@ const Gallery = () => {
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {/* Load More Button */}
+        {hasMoreItems && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex justify-center mt-8 sm:mt-10 md:mt-12"
+          >
+            <Button
+              onClick={handleLoadMore}
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-8 py-6 shadow-luxury transition-smooth"
+            >
+              Load More
+            </Button>
+          </motion.div>
+        )}
 
         {/* Lightbox */}
         <AnimatePresence>
